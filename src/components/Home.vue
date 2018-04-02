@@ -1,7 +1,8 @@
 <template>
-  <div v-if="!error">
+  <div v-if="!error && !loading">
     <single-blog-item v-for="blog in posts" :key="blog.id" :blog="blog"/>
   </div>
+  <p v-else-if="loading">Loading.........</p>
   <p v-else-if="error" class="error">An Error Occured</p>
 </template>
 
@@ -16,6 +17,7 @@ export default {
   data () {
     return {
       posts: {},
+      loading: true,
       error: false
     }
   },
@@ -23,8 +25,10 @@ export default {
     this.$http
       .get(`https://vujs-blog.firebaseio.com/.json`)
       .then(data => {
+        this.loading = false
         this.posts = data.body.posts
       }, errorRes => {
+        this.loading = false
         this.error = true
       })
   }
