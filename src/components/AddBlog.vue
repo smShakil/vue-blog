@@ -70,7 +70,7 @@ export default {
 <style scoped>
 .addBlog{
   padding: 50px;
-  background: #eee;
+  background: #fff;
   border-radius: 5px;
   box-shadow: 3px 3px 10px #ddd;
   margin-bottom: 50px;

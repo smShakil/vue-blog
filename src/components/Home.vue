@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div v-if="!error">
     <single-blog-item v-for="blog in posts" :key="blog.id" :blog="blog"/>
   </div>
+  <p v-else-if="error" class="error">An Error Occured</p>
 </template>
 
 <script>
@@ -14,14 +15,17 @@ export default {
   },
   data () {
     return {
-      posts: {}
+      posts: {},
+      error: false
     }
   },
   created () {
     this.$http
       .get(`https://vujs-blog.firebaseio.com/.json`)
-      .then(function (data) {
+      .then(data => {
         this.posts = data.body.posts
+      }, errorRes => {
+        this.error = true
       })
   }
 }
@@ -29,4 +33,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.error{
+  color: #f00;
+  font-size: 24px;
+}
 </style>
