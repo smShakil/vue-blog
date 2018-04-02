@@ -19,20 +19,18 @@
       <button @click.prevent="addBlog">Add Blog</button>
     </div>
 
-    <div class="preview">
-      <h2>Preview</h2>
-      <div class="bannerImg">
-        <img v-if="blog.banner" :src="blog.banner" alt="Banner Image">
-      </div>
-      <h3 class="title">{{blog.title}}</h3>
-      <p class="content">{{blog.content}}</p>
-    </div>
+    <single-blog-item :blog="blog"/>
   </div>
 </template>
 
 <script>
+import SingleBlog from './SingleBlog'
+
 export default {
   name: 'AddBlog',
+  components: {
+    'single-blog-item': SingleBlog
+  },
   data () {
     return {
       blog: {
@@ -70,8 +68,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.addBlog,
-.preview{
+.addBlog{
   padding: 50px;
   background: #eee;
   border-radius: 5px;
@@ -110,21 +107,6 @@ textarea{
   color: #fff;
   text-decoration: none;
   float: right;
-}
-.bannerImg{
-  max-width: 100%;
-  max-height: 300px;
-  margin-bottom: 20px;
-}
-.bannerImg img{
-  max-width: 100%;
-  max-height: 300px;
-  display: block;
-  margin: 0 auto;
-}
-.title{
-  font-size: 30px;
-  margin-bottom: 10px;
 }
 
 </style>
