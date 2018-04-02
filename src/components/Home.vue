@@ -26,7 +26,12 @@ export default {
       .get(`https://vujs-blog.firebaseio.com/.json`)
       .then(data => {
         this.loading = false
-        this.posts = data.body.posts
+        let blogArray = []
+        for (let key in data.body.posts) {
+          data.body.posts[key].id = key
+          blogArray.push(data.body.posts[key])
+        }
+        this.posts = blogArray
       }, errorRes => {
         this.loading = false
         this.error = true

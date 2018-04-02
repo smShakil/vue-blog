@@ -28,6 +28,7 @@ nav{
   padding: 16px 20px;
   background: rgba(0,0,0,0.6);
   text-align: center;
+  z-index: 99;
 }
 ul li{
   display: inline-block;

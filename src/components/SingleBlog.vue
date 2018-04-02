@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="singleItem">
+      <button class="deleteButton" @click="deletepost(blog.id)">Delete</button>
       <div class="bannerImg">
         <img v-if="blog.banner" :src="blog.banner" alt="Banner Image">
       </div>
@@ -13,15 +14,26 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex'
+
 export default {
   name: 'SingleBlog',
-  props: ['blog']
+  props: ['blog'],
+  methods: {
+    // ...mapActions([
+    //   'deletePost'
+    // ])
+    deletepost () {
+      this.$store.dispatch('deletePost', this.blog.id)
+    }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .singleItem{
+  position: relative;
   padding: 50px;
   background: #fff;
   border-radius: 5px;
@@ -49,5 +61,17 @@ export default {
 .blogContent .title{
   font-size: 30px;
   margin-bottom: 10px;
+}
+.deleteButton{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #F44336;
+  color: #fff;
+  text-decoration: none;
 }
 </style>
