@@ -1,12 +1,13 @@
 <template>
-  <div v-if="!error && !loading">
+  <div v-if="!this.$store.state.error && !this.$store.state.loading">
     <single-blog-item v-for="blog in posts" :key="blog.id" :blog="blog"/>
   </div>
-  <p v-else-if="loading">Loading.........</p>
-  <p v-else-if="error" class="error">An Error Occured</p>
+  <p v-else-if="this.$store.state.loading">Loading.........</p>
+  <p v-else-if="this.$store.state.error" class="error">An Error Occured</p>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import SingleBlog from './SingleBlog'
 
 export default {
@@ -14,28 +15,21 @@ export default {
   components: {
     'single-blog-item': SingleBlog
   },
-  data () {
-    return {
-      posts: {},
-      loading: true,
-      error: false
+
+  computed: {
+    posts () {
+      return this.$store.state.posts
     }
   },
+
+  methods: {
+    ...mapActions({
+      fetchPosts: 'fetchPosts'
+    })
+  },
+
   created () {
-    this.$http
-      .get(`https://vujs-blog.firebaseio.com/.json`)
-      .then(data => {
-        this.loading = false
-        let blogArray = []
-        for (let key in data.body.posts) {
-          data.body.posts[key].id = key
-          blogArray.push(data.body.posts[key])
-        }
-        this.posts = blogArray
-      }, errorRes => {
-        this.loading = false
-        this.error = true
-      })
+    this.fetchPosts()
   }
 }
 </script>

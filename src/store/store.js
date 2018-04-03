@@ -7,7 +7,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    delete: false
+    loading: true,
+    error: false,
+    posts: {}
   },
   mutations,
   actions

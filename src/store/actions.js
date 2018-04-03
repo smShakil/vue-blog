@@ -5,11 +5,21 @@ Vue.use(VueResource)
 const http = Vue.http
 
 const actions = {
-  deletePost: ({commit}, id) => {
+  fetchPosts: ({commit}) => {
     http
-      .delete('https://vujs-blog.firebaseio.com/posts/' + id + '.json')
+      .get(`https://vujs-blog.firebaseio.com/.json`)
+      .then(data => {
+        commit('fetchPosts', data)
+      }, errorRes => {
+        commit('handleError')
+      })
+  },
+
+  deletePost: ({commit}, payload) => {
+    http
+      .delete('https://vujs-blog.firebaseio.com/posts/' + payload + '.json')
       .then(function (data) {
-        commit('deleteBlog')
+        commit('deleteBlog', payload)
       })
   }
 }

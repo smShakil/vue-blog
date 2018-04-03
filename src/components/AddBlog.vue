@@ -19,7 +19,7 @@
       <button @click.prevent="addBlog">Add Blog</button>
     </div>
 
-    <single-blog-item :blog="blog"/>
+    <single-blog-item :blog="blog" :preview="preview"/>
   </div>
 </template>
 
@@ -38,7 +38,8 @@ export default {
         content: '',
         banner: ''
       },
-      blogPost: false
+      blogPost: false,
+      preview: true
     }
   },
   methods: {
@@ -60,6 +61,10 @@ export default {
             banner: ''
           }
           this.blogPost = true
+        }).then(function () {
+          setTimeout(() => {
+            this.blogPost = false
+          }, 3000)
         })
     }
   }

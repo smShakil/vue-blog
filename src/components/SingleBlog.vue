@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="singleItem">
-      <button class="deleteButton" @click="deletepost(blog.id)">Delete</button>
+      <button v-if="!preview" class="deleteButton" @click="deletepost(blog.id)">Delete</button>
       <div class="bannerImg">
         <img v-if="blog.banner" :src="blog.banner" alt="Banner Image">
       </div>
@@ -14,18 +14,15 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'SingleBlog',
-  props: ['blog'],
+  props: ['blog', 'preview'],
   methods: {
-    // ...mapActions([
-    //   'deletePost'
-    // ])
-    deletepost () {
-      this.$store.dispatch('deletePost', this.blog.id)
-    }
+    ...mapActions({
+      deletepost: 'deletePost'
+    })
   }
 }
 </script>
@@ -41,21 +38,21 @@ export default {
   margin-bottom: 50px;
 }
 .bannerImg{
-  max-width: calc(30% - 25px);
-  max-height: 200px;
+  width: calc(25% - 25px);
+  max-height: 150px;
   display: inline-block;
   margin-right: 20px;
   vertical-align: top;
 }
 .bannerImg img{
   max-width: 100%;
-  max-height: 200px;
+  max-height: 150px;
   display: block;
   margin: 0 auto;
 }
 .blogContent{
   display: inline-block;
-  width: 70%;
+  width: 75%;
   vertical-align: top;
 }
 .blogContent .title{
