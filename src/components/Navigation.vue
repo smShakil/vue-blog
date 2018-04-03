@@ -1,8 +1,8 @@
 <template>
   <nav>
     <ul>
-      <li><router-link to="/" exact>Home</router-link></li>
-      <li><router-link to="/add" exact>Add Blog</router-link></li>
+      <li><router-link to="/vue-blog/" exact>Home</router-link></li>
+      <li><router-link to="/vue-blog/add" exact>Add Blog</router-link></li>
     </ul>
   </nav>
 </template>

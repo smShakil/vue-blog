@@ -7,8 +7,8 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    { path: '/', name: 'Home', component: Home },
-    { path: '/add', name: 'AddBlog', component: AddBlog }
+    { path: '/vue-blog/', name: 'Home', component: Home },
+    { path: '/vue-blog/add', name: 'AddBlog', component: AddBlog }
   ],
   mode: 'history'
 })
